@@ -32,7 +32,7 @@ abstract class Animal  implements  AliveCreature{
         return weight;
     }
 
-    public void setAlive(boolean alive) {
+    public final void setAlive(boolean alive) {
         isAlive = alive;
     }
 

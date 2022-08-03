@@ -1,12 +1,15 @@
 package clasess;
 
+import java.awt.*;
+import java.util.ArrayList;
+
 public class Farm {
     public static final String CURRENCY = "USD";
     public static final float LAND;
     public static final int MILK_PRICE;
     public static final int MEAT_PRICE;
 
-    private static Animal[] barn = new Animal[10];
+    private static ArrayList Barn = new ArrayList<Animal>();
 
     private static int money;
     private static int wheat;
@@ -51,6 +54,10 @@ public class Farm {
 
     public static int getGrainFeed() {
         return grainFeed;
+    }
+
+    public static ArrayList getBarn() {
+        return Barn;
     }
 
     public static void addMoney(int money) {
