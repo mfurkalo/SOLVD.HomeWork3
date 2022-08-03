@@ -1,12 +1,19 @@
 package clasess;
 
+import org.apache.logging.log4j.*;
+
+
+import java.util.ArrayList;
+
 public class Farm {
+
+    private static final Logger log = LogManager.getLogger(Farm.class.getName());
     public static final String CURRENCY = "USD";
     public static final float LAND;
     public static final int MILK_PRICE;
     public static final int MEAT_PRICE;
 
-    private static Animal[] barn = new Animal[10];
+    private static ArrayList Barn = new ArrayList<Animal>();
 
     private static int money;
     private static int wheat;
@@ -53,6 +60,10 @@ public class Farm {
         return grainFeed;
     }
 
+    public static ArrayList getBarn() {
+        return Barn;
+    }
+
     public static void addMoney(int money) {
         Farm.money += money;
     }
@@ -83,5 +94,7 @@ public class Farm {
 
     public static void main(String[] args) {
         Farm myFarm = new Farm();
+        log.error("Error happened!");
+
     }
 }

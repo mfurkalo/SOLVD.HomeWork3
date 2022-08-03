@@ -46,4 +46,30 @@ public final class Wheat extends Plant implements Consumption {
             farm1.addMoney(-money);
         }
     }
+
+    @Override
+    public int hashCode() {
+        int result = 0;
+        char[] chars = getName().toCharArray();
+        for (char ch : chars
+        ) {
+            result += ch;
+        }
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        return (o instanceof Wheat)&& (getName() ==((Wheat) o).getName())&&(productivity==((Wheat) o).productivity);
+    }
+
+    @Override
+    public String toString() {
+        return "Wheat {"
+                + "fullName='" + getName() + '\''
+                + ", productivity=" + productivity
+                + ", harvest time=" + harvestTime
+                + ", price=" + price
+                + '}';
+    }
 }
