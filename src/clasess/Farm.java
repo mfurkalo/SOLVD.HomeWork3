@@ -1,10 +1,11 @@
 package clasess;
 
+import interfaces.FarmAble;
 import org.apache.logging.log4j.*;
 
 import java.util.ArrayList;
 
-public class Farm {
+public class Farm implements FarmAble {
 
     private static final Logger log = LogManager.getLogger(Farm.class.getName());
     public static final String CURRENCY = "USD";
@@ -31,63 +32,63 @@ public class Farm {
                 + "\n milk price: " + MILK_PRICE + "\n meat price: " + MEAT_PRICE);
     }
 
-    public static int getMoney() {
+    public int getMoney() {
         return money;
     }
 
-    public static int getWheat() {
+    public int getWheat() {
         return wheat;
     }
 
-    public static int getCorn() {
+    public int getCorn() {
         return corn;
     }
 
-    public static int getMilk() {
+    public int getMilk() {
         return milk;
     }
 
-    public static int getMeat() {
+    public int getMeat() {
         return meat;
     }
 
-    public static int getGrassFeed() {
+    public int getGrassFeed() {
         return grassFeed;
     }
 
-    public static int getGrainFeed() {
+    public int getGrainFeed() {
         return grainFeed;
     }
 
-    public static ArrayList getBarn() {
+    public ArrayList getBarn() {
         return Barn;
     }
 
-    public static void addMoney(int money) {
+    public void addMoney(int money) {
         Farm.money += money;
     }
 
-    public static void addWheat(int wheat) {
+    public void addWheat(int wheat) {
         Farm.wheat += wheat;
     }
 
-    public static void addCorn(int corn) {
+    public void addCorn(int corn) {
         Farm.corn += corn;
     }
 
-    public static void addMilk(int milk) {
+    public void addMilk(int milk) {
         Farm.milk += milk;
     }
 
-    public static void setMeat(int meat) {
+    public void addMeat(int meat) {
         Farm.meat += meat;
     }
 
-    public static void addGrassFeed(int grassFeed) {
+    public void addGrassFeed(int grassFeed) {
         Farm.grassFeed += grassFeed;
     }
 
-    public static void addGrainFeed(int grainFeed) {
+    public void addGrainFeed(int grainFeed) {
         Farm.grainFeed += grainFeed;
     }
 

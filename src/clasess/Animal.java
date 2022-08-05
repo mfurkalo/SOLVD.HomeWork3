@@ -2,18 +2,33 @@ package clasess;
 
 import interfaces.AliveCreature;
 
-abstract class Animal  implements  AliveCreature{
+abstract class Animal implements AliveCreature {
 
+    private final int price;
+    private int lifeTime;
     private boolean isAlive;
-    private String name= "animal";
+    private String name = "animal";
     private int age;
     private float weight;
 
-    public Animal(String name, int age, float weight) {
-        this.name +=name;
+    public Animal(String name, int age, float weight, int price) {
+        this.name += name;
         this.age = age;
-        this.weight =weight;
-        isAlive =true;
+        this.weight = weight;
+        this.price = price;
+        isAlive = true;
+    }
+
+    protected void setLifetime(int time) {
+        this.lifeTime = time;
+    }
+
+    public int getLifeTime() {
+        return lifeTime;
+    }
+
+    public int getPrice() {
+        return price;
     }
 
     public boolean isAlive() {

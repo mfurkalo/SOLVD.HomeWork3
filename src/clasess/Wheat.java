@@ -1,29 +1,25 @@
 package clasess;
 
-import interfaces.Consumption;
+import interfaces.*;
 
 public final class Wheat extends Plant implements Consumption {
 
-    private static int price = 3;
-    private float productivity;
-    private float plantedArea;
-    private int harvestTime;
-
     public Wheat(String name, float productivity, int harvestTime) {
         super();
-        setName(name);
+        setName("Wheat " + name);
         this.productivity = productivity;
         this.harvestTime = harvestTime;
+        this.price = 3;
     }
 
-    public static int getPrice() {
+    public int getPrice() {
         return price;
     }
 
     @Override
-    public void produceHarvest(int time, Farm farm) {
+    public void produceHarvest(int time, FarmAble farm) {
 
-        if (isPlanted()&&time % harvestTime == 0) {
+        if (isPlanted() && time % harvestTime == 0) {
             int harvest = (int) (productivity * plantedArea);
             setPlanted(false);
             farm.addWheat(harvest);
@@ -31,21 +27,13 @@ public final class Wheat extends Plant implements Consumption {
     }
 
     @Override
-    public void plantField(float plantedArea, Farm farm) {
+    public void plantField(float plantedArea, FarmAble farm) {
         this.plantedArea = plantedArea;
         int money = (int) (plantedArea * price);
         setPlanted(true);
         farm.addMoney(-money);
     }
 
-    @Override
-    public void toConsumption(int time, Object farm) {
-        if (farm instanceof Farm){
-            Farm farm1 =(Farm) farm;
-            int money = (int)(time*price*0.02);
-            farm1.addMoney(-money);
-        }
-    }
 
     @Override
     public int hashCode() {
@@ -59,8 +47,8 @@ public final class Wheat extends Plant implements Consumption {
     }
 
     @Override
-    public boolean equals(Object o){
-        return (o instanceof Wheat)&& (getName() ==((Wheat) o).getName())&&(productivity==((Wheat) o).productivity);
+    public boolean equals(Object o) {
+        return (o instanceof Wheat) && (getName() == ((Wheat) o).getName()) && (productivity == ((Wheat) o).productivity);
     }
 
     @Override
@@ -71,5 +59,11 @@ public final class Wheat extends Plant implements Consumption {
                 + ", harvest time=" + harvestTime
                 + ", price=" + price
                 + '}';
+    }
+
+    @Override
+    public void toConsumption(int time, FarmAble farm) {
+        int money = (int) (time * price * 0.01);
+        farm.addMoney(-money);
     }
 }

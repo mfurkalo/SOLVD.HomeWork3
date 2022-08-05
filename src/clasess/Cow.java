@@ -6,17 +6,16 @@ import java.util.Random;
 
 public final class Cow extends Animal implements Consumption, ProduceMeat, ProduceMilk {
 
-    private int price;
-    private int lifeTime = 450;
+    private String udder = "I have a big udder";
 
     public Cow(String name, int age, float weight, int price) {
-        super(name, age, weight);
-        this.price = price;
+        super(name, age, weight, price);
+        setLifetime(450);
     }
 
     @Override
     public void becomeNewAnimal(int time, Farm farm) {
-        if (isAlive() && time % lifeTime / 9 == 0) {
+        if (isAlive() && time % getLifeTime() / 9 == 0) {
             Random rand = new Random();
             Animal newAnimal;
             if (rand.nextBoolean()) {
@@ -28,17 +27,17 @@ public final class Cow extends Animal implements Consumption, ProduceMeat, Produ
     }
 
     @Override
-    public void butcher(int time, AliveCreature animal, Farm farm) {
-        if (isAlive() && time % lifeTime == 0) {
+    public void butcher(int time, AliveCreature animal, FarmAble farm) {
+        if (isAlive() && time % getLifeTime() == 0) {
             int meat = (int) (getWeight() * 0.5);
             setAlive(false);
-            farm.setMeat(meat);
+            farm.addMeat(meat);
             farm.getBarn().remove(animal);
         }
     }
 
     @Override
-    public void toConsumption(int time, Object farm) {
+    public void toConsumption(int time, FarmAble farm) {
         if (farm instanceof Farm) {
             Farm farm1 = (Farm) farm;
             int grasFeed = (int) (time * 2);
@@ -60,8 +59,8 @@ public final class Cow extends Animal implements Consumption, ProduceMeat, Produ
     }
 
     @Override
-    public boolean equals(Object o){
-        return (o instanceof Cow)&& (getAge() ==((Cow) o).getAge())&&(getWeight()==((Cow) o).getWeight());
+    public boolean equals(Object o) {
+        return (o instanceof Cow) && (getAge() == ((Cow) o).getAge()) && (getWeight() == ((Cow) o).getWeight());
     }
 
     @Override
@@ -70,8 +69,8 @@ public final class Cow extends Animal implements Consumption, ProduceMeat, Produ
                 + "fullName='" + getName() + '\''
                 + ", age=" + getAge()
                 + ", weight=" + getWeight()
-                + ", price=" + price
+                + ", price=" + getPrice()
+                + ", " + udder
                 + '}';
     }
-
 }

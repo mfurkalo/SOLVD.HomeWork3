@@ -1,9 +1,15 @@
 package clasess;
 
+import interfaces.FarmAble;
+
 abstract class Plant {
 
     private boolean isPlanted;
     private String name;
+    protected int price;
+    protected int harvestTime;
+    protected float productivity;
+    protected float plantedArea;
 
     public Plant() {
         this.name = "plant";
@@ -22,10 +28,10 @@ abstract class Plant {
     }
 
     public final void setName(String name) {
-        this.name +=(' '+ name);
+        this.name += (' ' + name);
     }
 
-    abstract public void produceHarvest(int time, Farm farm);
+    public abstract void produceHarvest(int time, FarmAble farm);
 
-    abstract public void plantField(float plantedArea, Farm farm);
+    public abstract void plantField(float plantedArea, FarmAble farm);
 }
