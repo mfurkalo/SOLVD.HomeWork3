@@ -1,5 +1,9 @@
 package clasess;
 
+import org.apache.logging.log4j.*;
+
+import java.util.ArrayList;
+
 public class Farm {
 
     private static final Logger log = LogManager.getLogger(Farm.class.getName());
@@ -90,6 +94,5 @@ public class Farm {
     public static void main(String[] args) {
         Farm myFarm = new Farm();
         log.error("Error happened!");
-
     }
 }
