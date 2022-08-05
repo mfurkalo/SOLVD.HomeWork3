@@ -1,10 +1,5 @@
 package clasess;
 
-import org.apache.logging.log4j.*;
-
-
-import java.util.ArrayList;
-
 public class Farm {
 
     private static final Logger log = LogManager.getLogger(Farm.class.getName());
