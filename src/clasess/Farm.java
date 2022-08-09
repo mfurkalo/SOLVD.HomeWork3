@@ -3,9 +3,14 @@ package clasess;
 import interfaces.FarmAble;
 import org.apache.logging.log4j.*;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Farm implements FarmAble {
+
+    enum AnimalType {
+        COW,
+        BULL
+    }
 
     private static final Logger log = LogManager.getLogger(Farm.class.getName());
     public static final String CURRENCY = "USD";
@@ -13,7 +18,15 @@ public class Farm implements FarmAble {
     public static final int MILK_PRICE;
     public static final int MEAT_PRICE;
 
-    private static ArrayList Barn = new ArrayList<Animal>();
+    private ArrayList barn = new ArrayList<Animal>();
+
+    Wheat wheatField = new Wheat("Hard Red Winter wheat", 32, 240);
+    Corn cornField = new Corn("Ambrosia Hybrid corn", 756, 60);
+
+    Random random = new Random();
+    Scanner input = new Scanner(System.in);
+    int maxTurnTime = 20;
+    int maxAnimalBuy = 5;
 
     private static int money;
     private static int wheat;
@@ -28,8 +41,8 @@ public class Farm implements FarmAble {
         LAND = 456.5f;
         MEAT_PRICE = 7;
         MILK_PRICE = 1;
-        System.out.println("Let's start your farm! You have: \n money " + money + " " + CURRENCY + '\n' + "land " + LAND
-                + "\n milk price: " + MILK_PRICE + "\n meat price: " + MEAT_PRICE);
+        System.out.println("Let's start your farm!      You have: \n \t money " + money + " " + CURRENCY + '\n' + "\tfree land " + LAND
+                + "; Empty barn for animals " + "\n\t milk price: " + MILK_PRICE + "\n\t meat price: " + MEAT_PRICE);
     }
 
     public int getMoney() {
@@ -61,7 +74,7 @@ public class Farm implements FarmAble {
     }
 
     public ArrayList getBarn() {
-        return Barn;
+        return barn;
     }
 
     public void addMoney(int money) {
@@ -93,7 +106,142 @@ public class Farm implements FarmAble {
     }
 
     public static void main(String[] args) {
+
         Farm myFarm = new Farm();
-        log.error("Error happened!");
+
+       myFarm.plantField(myFarm.wheatField, myFarm.cornField.getPlantedArea());
+       myFarm.plantField(myFarm.cornField, myFarm.wheatField.getPlantedArea());
+
+//        System.out.println(wheat.getPlantedArea() + " ######## " + corn.getPlantedArea() + " ##### available money " + money);
+
+        myFarm.animalBuy();
+        System.out.println(myFarm);
+
+
+//        log.error("Error happened!");
+//        log.info(" New Info happened!");
     }
+
+
+    private boolean addAnimal(String animalInput, AnimalType animalType, int age, int weight, boolean isInput) {
+        int price, number;
+        while (!isInput) {
+            try {
+                number = Integer.parseInt(animalInput);
+                if (number <= maxAnimalBuy) {
+                    for (int i = 0; i < number; i++) {
+                        weight = weight + random.nextInt(50);
+                        price = (int) (weight * 1.2);
+                        age = age + random.nextInt(10);
+                        System.out.print("Please enter name for your " + animalType + " " + (i + 1) + ": ");
+                        String name;
+                        do {
+                            name = input.nextLine();
+                            if (name.isBlank())
+                                System.out.println("Wrong name!");
+                            else
+                                break;
+                        } while (true);
+                        switch (animalType) {
+                            case COW:
+                                Cow cow = new Cow(name, age, weight, price);
+                                barn.add(cow);
+                                addMoney(-cow.getPrice());
+                                break;
+                            case BULL:
+                                Bull bull = new Bull(name, age, weight, price);
+                                barn.add(bull);
+                                addMoney(-bull.getPrice());
+                                break;
+                        }
+                    }
+                    isInput = true;
+                    break;
+                } else {
+                    System.out.println("Wrong number, not more than " + maxAnimalBuy + " animal per once");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Wrong input!");
+                log.error("Error Input happened! " + e.getMessage());
+            }
+            break;
+        }
+        return isInput;
+    }
+
+    void plantField(Plant plant, float plantedArea) {
+        System.out.println("How much land would you like to plant with " + plant);
+        String plantInput = input.nextLine();
+        while (true) {
+            try {
+                float area;
+                area = Float.parseFloat(plantInput);
+                if (area <= (LAND - plantedArea)) {
+                    plant.plantField(area, this);
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.print("Wrong input!");
+                log.error("Error Input happened! " + e.getMessage());
+            }
+            System.out.println(" Available only " + (LAND - plantedArea) + " land");
+            plantInput = input.nextLine();
+        }
+    }
+
+    void animalBuy() {
+        boolean isBullBought = false, isCowBought = false;
+        int age = 45, weight = 600;
+        do {
+            System.out.println("What animal would you like to by:\n \t1: cow\n\t2: bull");
+            String animalInput = input.nextLine();
+            if (!animalInput.isBlank() && !isCowBought && (animalInput.equalsIgnoreCase("1: cow") ||
+                    animalInput.equalsIgnoreCase("cow") || animalInput.equals("1"))) {
+                System.out.print("How much cows? ");
+                animalInput = input.nextLine();
+                isCowBought = addAnimal(animalInput, AnimalType.COW, age, weight, false);
+            } else if (!animalInput.isBlank() && !isBullBought && (animalInput.equalsIgnoreCase("2: bull") ||
+                    animalInput.equalsIgnoreCase("bull") || animalInput.equals("2"))) {
+                age = 35;
+                weight = 700;
+                System.out.print("How much bulls? ");
+                animalInput = input.nextLine();
+                isBullBought = addAnimal(animalInput, AnimalType.BULL, age, weight, false);
+            } else
+                System.out.println("Wrong input! Cows are bought: " + isCowBought + "; Bulls are bought: " +
+                        isBullBought);
+        } while (!isBullBought || !isCowBought);
+    }
+
+    @Override
+    public String toString() {
+        return ("\t\t\t##########  Farm  ########## \n"
+                + "money '" + money + "',\t"
+                + "free land '" + (LAND- cornField.getPlantedArea()-wheatField.getPlantedArea() )+ "',\t"
+                + "wheat '" + wheat + "',\t"
+                + "corn '" + corn + "',\t"
+                + "milk '" + milk + "',\t"
+                + "meat '" + meat + "',\t"
+                + "grassFeed '" + grassFeed + "',\t"
+                + "grainFeed '" + grainFeed + "',\t\n"
+                + "there are " + barn.size() + " animals :\n")
+                + barnContent();
+    }
+
+
+
+
+
+    String barnContent() {
+        StringBuilder builder = new StringBuilder();
+        for (Object animal : barn
+        ) {
+            builder.append('\t').append(animal).append('\n');
+        }
+        return builder.toString();
+    }
+
+
+
+
 }

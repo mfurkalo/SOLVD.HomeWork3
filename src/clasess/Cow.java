@@ -7,6 +7,7 @@ import java.util.Random;
 public final class Cow extends Animal implements Consumption, ProduceMeat, ProduceMilk {
 
     private String udder = "I have a big udder";
+    private int calf;
 
     public Cow(String name, int age, float weight, int price) {
         super(name, age, weight, price);
@@ -15,20 +16,21 @@ public final class Cow extends Animal implements Consumption, ProduceMeat, Produ
 
     @Override
     public void becomeNewAnimal(int time, Farm farm) {
-        if (isAlive() && time % getLifeTime() / 9 == 0) {
+        if (isAlive() && time / (getLifeTime() / 9) >= 1 && time / (getLifeTime() / 9) > calf) {
             Random rand = new Random();
             Animal newAnimal;
             if (rand.nextBoolean()) {
                 newAnimal = new Cow("New", 0, 10.5f, 1);
             } else
                 newAnimal = new Bull("New", 0, 10.5f, 1);
+            calf++;
             farm.getBarn().add(newAnimal);
         }
     }
 
     @Override
     public void butcher(int time, AliveCreature animal, FarmAble farm) {
-        if (isAlive() && time % getLifeTime() == 0) {
+        if (isAlive() && time / getLifeTime() >= 1) {
             int meat = (int) (getWeight() * 0.5);
             setAlive(false);
             farm.addMeat(meat);
@@ -66,10 +68,11 @@ public final class Cow extends Animal implements Consumption, ProduceMeat, Produ
     @Override
     public String toString() {
         return "Cow {"
-                + "fullName='" + getName() + '\''
-                + ", age=" + getAge()
-                + ", weight=" + getWeight()
-                + ", price=" + getPrice()
+                + "'" + getName() + '\''
+                + ", age = " + getAge()
+                + ", weight = " + getWeight()
+                + ", price = " + getPrice()
+                + ", calf= " + calf
                 + ", " + udder
                 + '}';
     }

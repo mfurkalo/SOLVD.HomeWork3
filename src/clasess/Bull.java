@@ -21,7 +21,7 @@ public final class Bull extends Animal implements Consumption, ProduceMeat {
 
     @Override
     public void butcher(int time, AliveCreature animal, FarmAble farm) {
-        if (isAlive() && time % getLifeTime() == 0) {
+        if (isAlive() && time / getLifeTime() >= 1) {
             int meat = (int) (getWeight() * 0.6);
             setAlive(false);
             farm.addMeat(meat);
@@ -58,10 +58,10 @@ public final class Bull extends Animal implements Consumption, ProduceMeat {
     @Override
     public String toString() {
         return "Bull {"
-                + "fullName='" + getName() + '\''
-                + ", age=" + getAge()
-                + ", weight=" + getWeight()
-                + ", price=" + getPrice()
+                + "'" + getName() + '\''
+                + ", age = " + getAge()
+                + ", weight = " + getWeight()
+                + ", price = " + getPrice()
                 + ", " + balls
                 + '}';
     }

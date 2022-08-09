@@ -20,7 +20,7 @@ public final class Wheat extends Plant implements Consumption {
     public void produceHarvest(int time, FarmAble farm) {
 
         if (isPlanted() && time % harvestTime == 0) {
-            int harvest = (int) (productivity * plantedArea);
+            int harvest = (int) (productivity * getPlantedArea());
             setPlanted(false);
             farm.addWheat(harvest);
         }
@@ -28,7 +28,7 @@ public final class Wheat extends Plant implements Consumption {
 
     @Override
     public void plantField(float plantedArea, FarmAble farm) {
-        this.plantedArea = plantedArea;
+        setPlantedArea(plantedArea);
         int money = (int) (plantedArea * price);
         setPlanted(true);
         farm.addMoney(-money);
@@ -54,7 +54,7 @@ public final class Wheat extends Plant implements Consumption {
     @Override
     public String toString() {
         return "Wheat {"
-                + "fullName='" + getName() + '\''
+                + "'" + getName() + '\''
                 + ", productivity=" + productivity
                 + ", harvest time=" + harvestTime
                 + ", price=" + price

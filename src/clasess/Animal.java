@@ -11,8 +11,9 @@ abstract class Animal implements AliveCreature {
     private int age;
     private float weight;
 
+
     public Animal(String name, int age, float weight, int price) {
-        this.name += name;
+        this.name += (' '+name);
         this.age = age;
         this.weight = weight;
         this.price = price;
