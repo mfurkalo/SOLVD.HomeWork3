@@ -19,13 +19,14 @@ public final class Corn extends Plant implements Consumption {
     @Override
     public void produceHarvest(int time, FarmAble farm) {
 
-        if (time % harvestTime == 0) {
+        if (isPlanted() && growingTime>=harvestTime) {
             int harvest = (int) (productivity * getPlantedArea());
             setPlanted(false);
+            setGrowingTime(0);
+            setPlantedArea(0);
             farm.addCorn(harvest);
         }
     }
-
 
     @Override
     public void plantField(float plantedArea, FarmAble farm) {
@@ -33,12 +34,10 @@ public final class Corn extends Plant implements Consumption {
         int money = (int) (plantedArea * price);
         setPlanted(true);
         farm.addMoney(-money);
-
     }
 
     @Override
     public void toConsumption(int time, FarmAble farm) {
-
         int money = (int) (time * price * 0.02);
         farm.addMoney(-money);
     }

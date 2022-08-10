@@ -20,12 +20,12 @@ public final class Bull extends Animal implements Consumption, ProduceMeat {
     }
 
     @Override
-    public void butcher(int time, AliveCreature animal, FarmAble farm) {
-        if (isAlive() && time / getLifeTime() >= 1) {
+    public void butcher(FarmAble farm) {
+        if (isAlive() && getAge() / getLifeTime() >= 1) {
             int meat = (int) (getWeight() * 0.6);
             setAlive(false);
             farm.addMeat(meat);
-            farm.getBarn().remove(animal);
+            farm.getBarn().remove(this);
         }
     }
 
@@ -36,7 +36,6 @@ public final class Bull extends Animal implements Consumption, ProduceMeat {
         int grain = (int) (time * 1.2);
         farm.addGrassFeed(-grasFeed);
         farm.addGrainFeed(-grain);
-
     }
 
     @Override

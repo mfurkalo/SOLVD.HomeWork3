@@ -41,8 +41,9 @@ public class Farm implements FarmAble {
         LAND = 456.5f;
         MEAT_PRICE = 7;
         MILK_PRICE = 1;
-        System.out.println("Let's start your farm!      You have: \n \t money " + money + " " + CURRENCY + '\n' + "\tfree land " + LAND
-                + "; Empty barn for animals " + "\n\t milk price: " + MILK_PRICE + "\n\t meat price: " + MEAT_PRICE);
+        System.out.println("Let's start your farm!      You have: \n \t money " + money + " " + CURRENCY + '\n' +
+                "\tfree land " + LAND + "; Empty barn for animals " + "\n\t milk price: " + MILK_PRICE +
+                "\n\t meat price: " + MEAT_PRICE);
     }
 
     public int getMoney() {
@@ -106,22 +107,47 @@ public class Farm implements FarmAble {
     }
 
     public static void main(String[] args) {
-
+        int totalTime = 0, turnTime = 2;
         Farm myFarm = new Farm();
-
-       myFarm.plantField(myFarm.wheatField, myFarm.cornField.getPlantedArea());
-       myFarm.plantField(myFarm.cornField, myFarm.wheatField.getPlantedArea());
-
-//        System.out.println(wheat.getPlantedArea() + " ######## " + corn.getPlantedArea() + " ##### available money " + money);
-
+        boolean game = true;
+        Animal animal;
+        myFarm.plantField(myFarm.wheatField, myFarm.cornField.getPlantedArea());
+        myFarm.plantField(myFarm.cornField, myFarm.wheatField.getPlantedArea());
         myFarm.animalBuy();
-        System.out.println(myFarm);
-
-
-//        log.error("Error happened!");
-//        log.info(" New Info happened!");
+        while (game) {
+            String mainInput;
+            turnTime = turnTime + myFarm.random.nextInt(myFarm.maxTurnTime);
+            totalTime = totalTime + turnTime;
+            myFarm.wheatField.toConsumption(turnTime, myFarm);
+            myFarm.wheatField.grow(turnTime);
+            myFarm.wheatField.produceHarvest(totalTime, myFarm);
+            myFarm.cornField.toConsumption(turnTime, myFarm);
+            myFarm.cornField.grow(turnTime);
+            myFarm.cornField.produceHarvest(totalTime, myFarm);
+            for (int i = 0; i < myFarm.barn.size(); i++) {
+                animal = (Animal) myFarm.barn.get(i);
+                if (animal instanceof Cow) {
+                    ((Cow) animal).produceMilk(turnTime, myFarm);
+                    animal.grow(turnTime);
+                    animal.becomeNewAnimal(totalTime, myFarm);
+                    ((Cow) animal).toConsumption(turnTime, myFarm);
+                    animal.butcher(myFarm);
+                } else if (animal instanceof Bull) {
+                    animal.grow(turnTime);
+                    ((Bull) animal).toConsumption(turnTime, myFarm);
+                    animal.butcher(myFarm);
+                }
+            }
+            System.out.println("\n\t\t ##### TOTAL time: '" + totalTime + "\t ##### TURN time: '" + turnTime + "' ");
+            System.out.println(myFarm);
+            myFarm.marketOperation();
+            System.out.println(myFarm);
+            System.out.println("\t\t######  Would you like to finish your Farm ?  (type 'YES')");
+            mainInput = myFarm.input.nextLine();
+            if (mainInput.trim().toLowerCase().equals("yes"))
+                game = false;
+        }
     }
-
 
     private boolean addAnimal(String animalInput, AnimalType animalType, int age, int weight, boolean isInput) {
         int price, number;
@@ -217,7 +243,7 @@ public class Farm implements FarmAble {
     public String toString() {
         return ("\t\t\t##########  Farm  ########## \n"
                 + "money '" + money + "',\t"
-                + "free land '" + (LAND- cornField.getPlantedArea()-wheatField.getPlantedArea() )+ "',\t"
+                + "free land '" + (LAND - cornField.getPlantedArea() - wheatField.getPlantedArea()) + "',\t"
                 + "wheat '" + wheat + "',\t"
                 + "corn '" + corn + "',\t"
                 + "milk '" + milk + "',\t"
@@ -228,9 +254,132 @@ public class Farm implements FarmAble {
                 + barnContent();
     }
 
+    void marketOperation() {
+        int price, number;
+        boolean isTrading = true;
+        do {
+            System.out.println("What would you like to do: \n\t1: BUY\n\t2: SELL\n\t3: PLANT\n\t4: CONTINUE");
+            String marketInput = input.nextLine();
+            switch (marketInput.toLowerCase().trim()) {
+                case "1":
+                case "buy":
+                    boolean isBuying = true;
+                    while (isBuying) {
+                        System.out.println("What would you like to buy: \n\t1: Animal\n\t2: Gras feed\n\t3: Grain feed" +
+                                "\n\t4: CANCEL");
+                        marketInput = input.nextLine();
+                        if (marketInput.equals("1")) {
+                            this.animalBuy();
 
-
-
+                        } else if (marketInput.equals("2")) {
+                            price = 1 + random.nextInt(3);
+                            System.out.print("How much Gras feed are you buying (price " + price + ") ? ");
+                            marketInput = input.nextLine();
+                            try {
+                                number = Integer.parseInt(marketInput);
+                                this.addMoney(-number * price);
+                                this.addGrassFeed(number);
+                            } catch (NumberFormatException e) {
+                                System.out.print("Wrong input!");
+                                log.error("Error Input happened! " + e.getMessage());
+                            }
+                        } else if (marketInput.equals("3")) {
+                            price = 1 + random.nextInt(3);
+                            System.out.print("How much Grain feed are you buying (price " + price + ") ? ");
+                            marketInput = input.nextLine();
+                            try {
+                                number = Integer.parseInt(marketInput);
+                                this.addMoney(-number * price);
+                                this.addGrainFeed(number);
+                            } catch (NumberFormatException e) {
+                                System.out.print("Wrong input!");
+                                log.error("Error Input happened! " + e.getMessage());
+                            }
+                        } else
+                            isBuying = false;
+                    }
+                    break;
+                case "2":
+                case "sell":
+                    boolean isSelling = true;
+                    while (isSelling) {
+                        System.out.println("What would you like to sell: \n\t1: Wheat\n\t2: Corn\n\t3: Milk\n\t4: Meat" +
+                                "\n\t5: CANCEL");
+                        marketInput = input.nextLine();
+                        if (marketInput.equals("1")) {
+                            price = wheatField.getPrice() - 2 + random.nextInt(3);
+                            System.out.print("How much Wheat are you selling (price " + price + ") ? ");
+                            marketInput = input.nextLine();
+                            try {
+                                number = Integer.parseInt(marketInput);
+                                addWheat(-number);
+                                addMoney(number * price);
+                            } catch (NumberFormatException e) {
+                                System.out.print("Wrong input!");
+                                log.error("Error Input happened! " + e.getMessage());
+                            }
+                        } else if (marketInput.equals("2")) {
+                            price = cornField.getPrice() - 1 + random.nextInt(3);
+                            System.out.print("How much Corn are you selling (price " + price + ") ? ");
+                            marketInput = input.nextLine();
+                            try {
+                                number = Integer.parseInt(marketInput);
+                                addCorn(-number);
+                                addMoney(number * price);
+                            } catch (NumberFormatException e) {
+                                System.out.print("Wrong input!");
+                                log.error("Error Input happened! " + e.getMessage());
+                            }
+                        } else if (marketInput.equals("3")) {
+                            System.out.print("How much Milk are you selling (price " + MILK_PRICE + ") ? ");
+                            marketInput = input.nextLine();
+                            try {
+                                number = Integer.parseInt(marketInput);
+                                addMilk(-number);
+                                addMoney(number * MILK_PRICE);
+                            } catch (NumberFormatException e) {
+                                System.out.print("Wrong input!");
+                                log.error("Error Input happened! " + e.getMessage());
+                            }
+                        } else if (marketInput.equals("4")) {
+                            System.out.print("How much Meat are you selling (price " + MEAT_PRICE + ") ? ");
+                            marketInput = input.nextLine();
+                            try {
+                                number = Integer.parseInt(marketInput);
+                                addMeat(-number);
+                                addMoney(number * MEAT_PRICE);
+                            } catch (NumberFormatException e) {
+                                System.out.print("Wrong input!");
+                                log.error("Error Input happened! " + e.getMessage());
+                            }
+                        } else
+                            isSelling = false;
+                    }
+                    break;
+                case "3":
+                case "plant":
+                    while (true) {
+                        System.out.println("What would you like to plant  on '" + (LAND - cornField.getPlantedArea() -
+                                wheatField.getPlantedArea()) + "' : \n\t1: Wheat\n\t2: Corn\n\t3: CANCEL");
+                        marketInput = input.nextLine();
+                        if (marketInput.equals("1"))
+                            plantField(wheatField, cornField.getPlantedArea());
+                        else if (marketInput.equals("2")) {
+                            plantField(cornField, wheatField.getPlantedArea());
+                        } else {
+                            break;
+                        }
+                    }
+                    break;
+                case "4":
+                case "continue":
+                    isTrading = false;
+                    break;
+            }
+            if (marketInput.equals("4"))
+                System.out.println("\t\t##### Enjoy the Farm #####");
+        } while (isTrading);
+    }
 
     String barnContent() {
         StringBuilder builder = new StringBuilder();
@@ -240,8 +389,4 @@ public class Farm implements FarmAble {
         }
         return builder.toString();
     }
-
-
-
-
 }

@@ -1,8 +1,9 @@
 package clasess;
 
 import interfaces.AliveCreature;
+import interfaces.Grow;
 
-abstract class Animal implements AliveCreature {
+abstract class Animal implements AliveCreature, Grow {
 
     private final int price;
     private int lifeTime;
@@ -11,9 +12,8 @@ abstract class Animal implements AliveCreature {
     private int age;
     private float weight;
 
-
     public Animal(String name, int age, float weight, int price) {
-        this.name += (' '+name);
+        this.name += (' ' + name);
         this.age = age;
         this.weight = weight;
         this.price = price;
@@ -61,4 +61,9 @@ abstract class Animal implements AliveCreature {
     }
 
     abstract public void becomeNewAnimal(int time, Farm farm);
+
+    public void grow(int time) {
+        age = age + time;
+        weight= weight+(int)(time*1.5);
+    }
 }

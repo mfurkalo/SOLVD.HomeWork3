@@ -18,10 +18,11 @@ public final class Wheat extends Plant implements Consumption {
 
     @Override
     public void produceHarvest(int time, FarmAble farm) {
-
-        if (isPlanted() && time % harvestTime == 0) {
+        if (isPlanted() && growingTime>=harvestTime) {
             int harvest = (int) (productivity * getPlantedArea());
             setPlanted(false);
+            setGrowingTime(0);
+            setPlantedArea(0);
             farm.addWheat(harvest);
         }
     }
@@ -33,7 +34,6 @@ public final class Wheat extends Plant implements Consumption {
         setPlanted(true);
         farm.addMoney(-money);
     }
-
 
     @Override
     public int hashCode() {

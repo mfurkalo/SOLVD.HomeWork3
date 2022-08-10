@@ -15,6 +15,11 @@ public final class Cow extends Animal implements Consumption, ProduceMeat, Produ
     }
 
     @Override
+    public void produceMilk(int time,Farm farm) {
+        farm.addMilk(time*10);
+    }
+
+    @Override
     public void becomeNewAnimal(int time, Farm farm) {
         if (isAlive() && time / (getLifeTime() / 9) >= 1 && time / (getLifeTime() / 9) > calf) {
             Random rand = new Random();
@@ -29,12 +34,12 @@ public final class Cow extends Animal implements Consumption, ProduceMeat, Produ
     }
 
     @Override
-    public void butcher(int time, AliveCreature animal, FarmAble farm) {
-        if (isAlive() && time / getLifeTime() >= 1) {
+    public void butcher(FarmAble farm) {
+        if (isAlive() && getAge() / getLifeTime() >= 1) {
             int meat = (int) (getWeight() * 0.5);
             setAlive(false);
             farm.addMeat(meat);
-            farm.getBarn().remove(animal);
+            farm.getBarn().remove(this);
         }
     }
 
@@ -42,8 +47,8 @@ public final class Cow extends Animal implements Consumption, ProduceMeat, Produ
     public void toConsumption(int time, FarmAble farm) {
         if (farm instanceof Farm) {
             Farm farm1 = (Farm) farm;
-            int grasFeed = (int) (time * 2);
-            int grain = (int) (time * 1);
+            int grasFeed = time * 2;
+            int grain = time * 1;
             farm1.addGrassFeed(-grasFeed);
             farm1.addGrainFeed(-grain);
         }
