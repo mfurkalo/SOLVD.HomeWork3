@@ -1,3 +1,7 @@
+/**
+ * The base ancestor class for animals on the farm
+ */
+
 package clasess;
 
 import interfaces.AliveCreature;

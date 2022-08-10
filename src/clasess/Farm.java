@@ -1,3 +1,8 @@
+/**
+ * The main program class
+ * runs a farm simulator
+ */
+
 package clasess;
 
 import interfaces.FarmAble;
@@ -136,6 +141,15 @@ public class Farm implements FarmAble {
                     animal.grow(turnTime);
                     ((Bull) animal).toConsumption(turnTime, myFarm);
                     animal.butcher(myFarm);
+                }
+                if (animal.getName().equals("New")){
+                    try {
+                        throw new NoCustomNameException(animal," needs a new custom name ");
+                    } catch (NoCustomNameException e) {
+                        System.out.println(e);
+                        mainInput = myFarm.input.nextLine();
+                        animal.setName(mainInput);
+                    }
                 }
             }
             System.out.println("\n\t\t ##### TOTAL time: '" + totalTime + "\t ##### TURN time: '" + turnTime + "' ");

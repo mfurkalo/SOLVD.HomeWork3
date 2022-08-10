@@ -1,3 +1,7 @@
+/**
+ * production of milk depends on time
+ */
+
 package interfaces;
 
 import clasess.Farm;

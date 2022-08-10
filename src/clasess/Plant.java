@@ -1,3 +1,7 @@
+/**
+ * The base ancestor class for plants
+ */
+
 package clasess;
 
 import interfaces.FarmAble;

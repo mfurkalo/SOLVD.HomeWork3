@@ -1,3 +1,7 @@
+/**
+ * grow depends on time
+ */
+
 package interfaces;
 
 public interface Grow {

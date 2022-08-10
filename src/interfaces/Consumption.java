@@ -1,5 +1,8 @@
-package interfaces;
+/**
+ * Consumption depends on time
+ */
 
+package interfaces;
 
 public interface Consumption {
 

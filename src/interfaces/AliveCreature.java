@@ -1,3 +1,7 @@
+/**
+ * Avery alive creature dies
+ */
+
 package interfaces;
 
 public interface AliveCreature {

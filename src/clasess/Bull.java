@@ -1,3 +1,6 @@
+/**
+ * A bull is an animal which consume food and produces meat
+ */
 package clasess;
 
 import interfaces.*;

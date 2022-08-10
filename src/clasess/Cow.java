@@ -1,3 +1,8 @@
+/**
+ * A cow is an animal which consume food and produces milk, meat,
+ * and gives birth to a new animal
+ */
+
 package clasess;
 
 import interfaces.*;

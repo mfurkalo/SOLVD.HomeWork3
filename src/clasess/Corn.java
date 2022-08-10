@@ -1,3 +1,7 @@
+/**
+ * a plant with its unique characteristics,
+ */
+
 package clasess;
 
 import interfaces.*;

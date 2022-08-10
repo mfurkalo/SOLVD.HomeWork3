@@ -1,3 +1,7 @@
+/**
+ * describes a farm
+ */
+
 package interfaces;
 
 import java.util.ArrayList;

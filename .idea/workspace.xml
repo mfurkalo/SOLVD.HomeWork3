@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0fa9478f-0676-4f07-a385-a3cad6fe1637" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/farm1.HomeWork3.iml" afterDir="false" />
+    <list default="true" id="0fa9478f-0676-4f07-a385-a3cad6fe1637" name="Changes" comment="T first working build. Lots of changes.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clasess/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clasess/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clasess/Bull.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clasess/Bull.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clasess/Corn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clasess/Corn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clasess/Cow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clasess/Cow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clasess/Farm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clasess/Farm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clasess/Plant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clasess/Plant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clasess/Wheat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clasess/Wheat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/AliveCreature.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/AliveCreature.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/Consumption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Consumption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/FarmAble.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/FarmAble.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/Grow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Grow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/ProduceMeat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/ProduceMeat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/ProduceMilk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/ProduceMilk.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,11 +26,17 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="XML Properties File" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -36,23 +50,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "E:/jprojects/Solvd/farm1.HomeWork3",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/libs/apache-log4j-2.18.0-bin/apache-log4j-2.18.0-bin/log4j-core-2.18.0.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\jprojects\Solvd\farm1.HomeWork3" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="Farm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="clasess.Farm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="clasess.Farm" />
       <module name="farm1.HomeWork3" />
       <extension name="coverage">
@@ -67,7 +81,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Farm" />
+        <item itemvalue="Application.clasess.Farm" />
       </list>
     </recent_temporary>
   </component>
@@ -80,6 +94,56 @@
       <option name="presentableId" value="Default" />
       <updated>1659527916635</updated>
     </task>
+    <task id="LOCAL-00001" summary="Initial commit">
+      <created>1659530909763</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1659530909763</updated>
+    </task>
+    <task id="LOCAL-00002" summary="added Caw class and some methods">
+      <created>1659535452564</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1659535452564</updated>
+    </task>
+    <task id="LOCAL-00003" summary="added Caw class and some methods">
+      <created>1659665167674</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1659665167674</updated>
+    </task>
+    <task id="LOCAL-00004" summary="added logging">
+      <created>1659665381366</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1659665381366</updated>
+    </task>
+    <task id="LOCAL-00005" summary="refactoring, added FarmAble interface">
+      <created>1659707609294</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1659707609294</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Refactoring, added functional to the Farm.class">
+      <created>1660006857618</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1660006857618</updated>
+    </task>
+    <task id="LOCAL-00007" summary="T first working build. Lots of changes.">
+      <created>1660096622586</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1660096622586</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -92,5 +156,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit" />
+    <MESSAGE value="added Logger" />
+    <MESSAGE value="Logger corrected" />
+    <MESSAGE value="added Caw class and some methods" />
+    <MESSAGE value="added logging" />
+    <MESSAGE value="refactoring, added FarmAble interface" />
+    <MESSAGE value="Refactoring, added functional to the Farm.class" />
+    <MESSAGE value="T first working build. Lots of changes." />
+    <option name="LAST_COMMIT_MESSAGE" value="T first working build. Lots of changes." />
   </component>
 </project>
