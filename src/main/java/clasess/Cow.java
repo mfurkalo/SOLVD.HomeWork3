@@ -16,7 +16,10 @@ import java.util.Random;
 
 public final class Cow extends Animal implements Consumption, ProduceMeat, ProduceMilk {
 
-    private String udder = "I have a big udder";
+    public int getCalf() {
+        return calf;
+    }
+
     private int calf;
 
     public Cow(String name, int age, float weight, int price) {
@@ -59,7 +62,7 @@ public final class Cow extends Animal implements Consumption, ProduceMeat, Produ
         if (farm instanceof Farm) {
             Farm farm1 = (Farm) farm;
             int grasFeed = time * 2;
-            int grain = time * 1;
+            int grain = time;
             farm1.addGrassFeed(-grasFeed);
             farm1.addGrainFeed(-grain);
         }
@@ -78,7 +81,8 @@ public final class Cow extends Animal implements Consumption, ProduceMeat, Produ
 
     @Override
     public boolean equals(Object o) {
-        return (o instanceof Cow) && (getAge() == ((Cow) o).getAge()) && (getWeight() == ((Cow) o).getWeight());
+        return (o instanceof Cow) && (getAge() == ((Cow) o).getAge()) && (getWeight() == ((Cow) o).getWeight()
+                && (getCalf() == (((Cow) o).getCalf())));
     }
 
     @Override
@@ -88,8 +92,7 @@ public final class Cow extends Animal implements Consumption, ProduceMeat, Produ
                 + ", age = " + getAge()
                 + ", weight = " + getWeight()
                 + ", price = " + getPrice()
-                + ", calf= " + calf
-                + ", " + udder
+                + ", calf = " + getCalf()
                 + '}';
     }
 }

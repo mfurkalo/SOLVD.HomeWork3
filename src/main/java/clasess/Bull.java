@@ -12,7 +12,7 @@ import interfaces.ProduceMeat;
 
 public final class Bull extends Animal implements Consumption, ProduceMeat {
 
-    private String balls = "I have 2 balls";
+    private final String balls = "I have 2 balls";
 
     public String getBalls() {
         return balls;
@@ -64,6 +64,10 @@ public final class Bull extends Animal implements Consumption, ProduceMeat {
 
     @Override
     public String toString() {
-        return "Bull {" + "'" + getName() + '\'' + ", age = " + getAge() + ", weight = " + getWeight() + ", price = " + getPrice() + ", " + balls + '}';
+        return "Bull {" + "'" + getName()
+                + '\'' + ", age = " + getAge()
+                + ", weight = " + getWeight()
+                + ", price = " + getPrice()
+                + ", " + balls + '}';
     }
 }

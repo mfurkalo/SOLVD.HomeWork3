@@ -1,5 +1,7 @@
-/**
- * Avery alive creature dies
+/*
+ * Copyright (c) 2022
+ * Avery alive creature turns in meat
+ * use it for free
  */
 
 package interfaces;

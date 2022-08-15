@@ -54,7 +54,8 @@ public final class Wheat extends Plant implements Consumption {
 
     @Override
     public boolean equals(Object o) {
-        return (o instanceof Wheat) && (getName() == ((Wheat) o).getName()) && (productivity == ((Wheat) o).productivity);
+        return (o instanceof Wheat) && (getName().equals(((Wheat) o).getName()) && (productivity
+                == ((Wheat) o).productivity));
     }
 
     @Override

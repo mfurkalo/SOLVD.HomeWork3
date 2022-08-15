@@ -1,28 +1,30 @@
-/**
+/*
+ * Copyright (c) 2022
  * describes a farm
+ * use it for free
  */
 
 package interfaces;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface FarmAble {
 
 
-    public void addMoney(int money);
+    void addMoney(int money);
 
-    public void addWheat(int wheat);
+    void addWheat(int wheat);
 
-    public void addCorn(int corn);
+    void addCorn(int corn);
 
-    public void addMilk(int milk);
+     void addMilk(int milk);
 
-    public void addMeat(int meat);
+     void addMeat(int meat);
 
-    public void addGrassFeed(int grassFeed);
+     void addGrassFeed(int grassFeed);
 
-    public void addGrainFeed(int grainFeed);
+     void addGrainFeed(int grainFeed);
 
-    public ArrayList getBarn();
+     List<?> getBarn();
 
 }

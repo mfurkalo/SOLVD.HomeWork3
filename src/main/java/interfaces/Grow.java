@@ -1,5 +1,7 @@
-/**
+/*
+ * Copyright (c) 2022
  * grow depends on time
+ * use it for free
  */
 
 package interfaces;

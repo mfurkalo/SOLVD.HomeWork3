@@ -1,5 +1,7 @@
-/**
+/*
+ * Copyright (c) 2022
  * production of milk depends on time
+ * use it for free
  */
 
 package interfaces;
