@@ -1,5 +1,7 @@
-/**
+/*
+ * Copyright (c) 2022
  * The base ancestor class for plants
+ * use it for free
  */
 
 package clasess;
@@ -43,7 +45,7 @@ abstract class Plant implements Grow {
 
     @Override
     public final void grow(int time) {
-        growingTime =growingTime+time;
+        growingTime = growingTime + time;
     }
 
     protected void setPlantedArea(float area) {

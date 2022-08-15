@@ -1,11 +1,16 @@
-/**
+/*
+ * Copyright (c) 2022
  * A cow is an animal which consume food and produces milk, meat,
  * and gives birth to a new animal
+ * use it for free
  */
 
 package clasess;
 
-import interfaces.*;
+import interfaces.Consumption;
+import interfaces.FarmAble;
+import interfaces.ProduceMeat;
+import interfaces.ProduceMilk;
 
 import java.util.Random;
 
@@ -20,8 +25,8 @@ public final class Cow extends Animal implements Consumption, ProduceMeat, Produ
     }
 
     @Override
-    public void produceMilk(int time,Farm farm) {
-        farm.addMilk(time*10);
+    public void produceMilk(int time, Farm farm) {
+        farm.addMilk(time * 10);
     }
 
     @Override
@@ -40,7 +45,8 @@ public final class Cow extends Animal implements Consumption, ProduceMeat, Produ
 
     @Override
     public void butcher(FarmAble farm) {
-        if (isAlive() && getAge() / getLifeTime() >= 1) {
+        boolean isOld = (getAge() / getLifeTime() >= 1);
+        if (isAlive() && isOld) {
             int meat = (int) (getWeight() * 0.5);
             setAlive(false);
             farm.addMeat(meat);

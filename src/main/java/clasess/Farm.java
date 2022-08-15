@@ -1,14 +1,18 @@
-/**
+/*
+ * Copyright (c) 2022
  * The main program class
  * runs a farm simulator
+ * use it for free
  */
 
 package clasess;
 
 import interfaces.FarmAble;
-import org.apache.logging.log4j.*;
-
-import java.util.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Farm implements FarmAble {
 
@@ -23,7 +27,7 @@ public class Farm implements FarmAble {
     public static final int MILK_PRICE;
     public static final int MEAT_PRICE;
 
-    private ArrayList barn = new ArrayList<Animal>();
+    private ArrayList<Animal> barn = new ArrayList<>();
 
     Wheat wheatField = new Wheat("Hard Red Winter wheat", 32, 240);
     Corn cornField = new Corn("Ambrosia Hybrid corn", 756, 60);
@@ -112,7 +116,8 @@ public class Farm implements FarmAble {
     }
 
     public static void main(String[] args) {
-        int totalTime = 0, turnTime = 2;
+        int totalTime = 0;
+        int turnTime = 2;
         Farm myFarm = new Farm();
         boolean game = true;
         Animal animal;
@@ -130,7 +135,7 @@ public class Farm implements FarmAble {
             myFarm.cornField.grow(turnTime);
             myFarm.cornField.produceHarvest(totalTime, myFarm);
             for (int i = 0; i < myFarm.barn.size(); i++) {
-                animal = (Animal) myFarm.barn.get(i);
+                animal = myFarm.barn.get(i);
                 if (animal instanceof Cow) {
                     ((Cow) animal).produceMilk(turnTime, myFarm);
                     animal.grow(turnTime);
@@ -142,9 +147,9 @@ public class Farm implements FarmAble {
                     ((Bull) animal).toConsumption(turnTime, myFarm);
                     animal.butcher(myFarm);
                 }
-                if (animal.getName().equals("New")){
+                if (animal.getName().equals("New")) {
                     try {
-                        throw new NoCustomNameException(animal," needs a new custom name ");
+                        throw new NoCustomNameException(animal, " needs a new custom name ");
                     } catch (NoCustomNameException e) {
                         System.out.println(e);
                         mainInput = myFarm.input.nextLine();
@@ -152,13 +157,14 @@ public class Farm implements FarmAble {
                     }
                 }
             }
+
             System.out.println("\n\t\t ##### TOTAL time: '" + totalTime + "\t ##### TURN time: '" + turnTime + "' ");
             System.out.println(myFarm);
             myFarm.marketOperation();
             System.out.println(myFarm);
             System.out.println("\t\t######  Would you like to finish your Farm ?  (type 'YES')");
             mainInput = myFarm.input.nextLine();
-            if (mainInput.trim().toLowerCase().equals("yes"))
+            if (mainInput.trim().equalsIgnoreCase("yes"))
                 game = false;
         }
     }
@@ -231,7 +237,8 @@ public class Farm implements FarmAble {
 
     void animalBuy() {
         boolean isBullBought = false, isCowBought = false;
-        int age = 45, weight = 600;
+        int age = 45;
+        int weight = 600;
         do {
             System.out.println("What animal would you like to by:\n \t1: cow\n\t2: bull");
             String animalInput = input.nextLine();
@@ -397,7 +404,7 @@ public class Farm implements FarmAble {
 
     String barnContent() {
         StringBuilder builder = new StringBuilder();
-        for (Object animal : barn
+        for (Animal animal : barn
         ) {
             builder.append('\t').append(animal).append('\n');
         }

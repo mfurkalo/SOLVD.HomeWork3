@@ -1,10 +1,13 @@
-/**
- * a plant with its unique characteristics,
+/*
+ * Copyright (c) 2022
+ * a plant with its unique characteristics
+ * use it for free
  */
 
 package clasess;
 
-import interfaces.*;
+import interfaces.Consumption;
+import interfaces.FarmAble;
 
 public final class Corn extends Plant implements Consumption {
 
@@ -23,7 +26,7 @@ public final class Corn extends Plant implements Consumption {
     @Override
     public void produceHarvest(int time, FarmAble farm) {
 
-        if (isPlanted() && growingTime>=harvestTime) {
+        if (isPlanted() && growingTime >= harvestTime) {
             int harvest = (int) (productivity * getPlantedArea());
             setPlanted(false);
             setGrowingTime(0);

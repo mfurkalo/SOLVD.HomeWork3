@@ -1,5 +1,7 @@
-/**
+/*
+ * Copyright (c) 2022
  * The base ancestor class for animals on the farm
+ * use it for free
  */
 
 package clasess;
@@ -68,6 +70,6 @@ abstract class Animal implements AliveCreature, Grow {
 
     public void grow(int time) {
         age = age + time;
-        weight= weight+(int)(time*1.5);
+        weight = weight + (int) (time * 1.5);
     }
 }

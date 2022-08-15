@@ -1,10 +1,12 @@
-/**
+/*
+ * Copyright (c) 2022
  * The custom exception which happens with new animals without a custom name
+ * se it for free
  */
 
 package clasess;
 
-public class NoCustomNameException extends Exception{
+public class NoCustomNameException extends Exception {
 
     private Animal animal;
 

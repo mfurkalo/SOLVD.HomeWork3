@@ -1,5 +1,7 @@
-/**
- * a plant with its unique characteristics,
+/*
+ * Copyright (c) 2022
+ * a plant with its unique characteristics
+ * use it for free
  */
 
 package clasess;
@@ -22,7 +24,7 @@ public final class Wheat extends Plant implements Consumption {
 
     @Override
     public void produceHarvest(int time, FarmAble farm) {
-        if (isPlanted() && growingTime>=harvestTime) {
+        if (isPlanted() && growingTime >= harvestTime) {
             int harvest = (int) (productivity * getPlantedArea());
             setPlanted(false);
             setGrowingTime(0);

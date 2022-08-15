@@ -1,9 +1,14 @@
-/**
+/*
+ * Copyright (c) 2022
  * A bull is an animal which consume food and produces meat
+ * use it for free
  */
+
 package clasess;
 
-import interfaces.*;
+import interfaces.Consumption;
+import interfaces.FarmAble;
+import interfaces.ProduceMeat;
 
 public final class Bull extends Animal implements Consumption, ProduceMeat {
 
@@ -24,7 +29,8 @@ public final class Bull extends Animal implements Consumption, ProduceMeat {
 
     @Override
     public void butcher(FarmAble farm) {
-        if (isAlive() && getAge() / getLifeTime() >= 1) {
+        boolean isOld = (getAge() / getLifeTime() >= 1);
+        if (isAlive() && isOld) {
             int meat = (int) (getWeight() * 0.6);
             setAlive(false);
             farm.addMeat(meat);
@@ -45,8 +51,7 @@ public final class Bull extends Animal implements Consumption, ProduceMeat {
     public int hashCode() {
         int result = 0;
         char[] chars = getName().toCharArray();
-        for (char ch : chars
-        ) {
+        for (char ch : chars) {
             result += ch;
         }
         return result;
@@ -59,12 +64,6 @@ public final class Bull extends Animal implements Consumption, ProduceMeat {
 
     @Override
     public String toString() {
-        return "Bull {"
-                + "'" + getName() + '\''
-                + ", age = " + getAge()
-                + ", weight = " + getWeight()
-                + ", price = " + getPrice()
-                + ", " + balls
-                + '}';
+        return "Bull {" + "'" + getName() + '\'' + ", age = " + getAge() + ", weight = " + getWeight() + ", price = " + getPrice() + ", " + balls + '}';
     }
 }
