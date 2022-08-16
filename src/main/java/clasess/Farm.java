@@ -118,7 +118,7 @@ public class Farm implements FarmAble {
 
     public static void main(String[] args) {
         int totalTime = 0;
-        int turnTime = 2;
+        int turnTime;
         Farm myFarm = new Farm();
         boolean game = true;
         Animal animal;
@@ -127,7 +127,7 @@ public class Farm implements FarmAble {
         myFarm.animalBuy();
         while (game) {
             String mainInput;
-            turnTime = turnTime + myFarm.random.nextInt(myFarm.maxTurnTime);
+            turnTime = 2 + myFarm.random.nextInt(myFarm.maxTurnTime);
             totalTime = totalTime + turnTime;
             myFarm.wheatField.toConsumption(turnTime, myFarm);
             myFarm.wheatField.grow(turnTime);
@@ -148,13 +148,14 @@ public class Farm implements FarmAble {
                     ((Bull) animal).toConsumption(turnTime, myFarm);
                     animal.butcher(myFarm);
                 }
-                if (animal.getName().equals("New")) {
+                if (animal.getName().endsWith("New")) {
                     try {
                         throw new NoCustomNameException(animal, " needs a new custom name ");
                     } catch (NoCustomNameException e) {
                         System.out.println(e);
+                        System.out.println("New name: ");
                         mainInput = myFarm.input.nextLine();
-                        animal.setName(mainInput);
+                        animal.setName("animal " + mainInput);
                     }
                 }
             }

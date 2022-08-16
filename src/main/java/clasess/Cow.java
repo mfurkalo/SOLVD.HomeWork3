@@ -34,7 +34,7 @@ public final class Cow extends Animal implements Consumption, ProduceMeat, Produ
 
     @Override
     public void becomeNewAnimal(int time, Farm farm) {
-        if (isAlive() && time / (getLifeTime() / 9) >= 1 && time / (getLifeTime() / 9) > calf) {
+        if (isAlive() && getAge() / (getLifeTime() / 9) >= 1 && getAge() / (getLifeTime() / 9) > calf) {
             Random rand = new Random();
             Animal newAnimal;
             if (rand.nextBoolean()) {
