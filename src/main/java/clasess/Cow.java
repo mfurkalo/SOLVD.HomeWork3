@@ -1,12 +1,24 @@
+/*
+ * Copyright (c) 2022
+ * A cow is an animal which consume food and produces milk, meat,
+ * and gives birth to a new animal
+ * use it for free
+ */
+
 package clasess;
 
-import interfaces.*;
-
+import interfaces.Consumption;
+import interfaces.FarmAble;
+import interfaces.ProduceMilk;
 import java.util.Random;
 
-public final class Cow extends Animal implements Consumption, ProduceMeat, ProduceMilk {
+public final class Cow extends Animal implements Consumption, ProduceMilk {
 
-    private String udder = "I have a big udder";
+    public int getCalf() {
+        return calf;
+    }
+
+    private int calf;
 
     public Cow(String name, int age, float weight, int price) {
         super(name, age, weight, price);
@@ -14,25 +26,32 @@ public final class Cow extends Animal implements Consumption, ProduceMeat, Produ
     }
 
     @Override
+    public void produceMilk(int time, Farm farm) {
+        farm.addMilk(time * 10);
+    }
+
+    @Override
     public void becomeNewAnimal(int time, Farm farm) {
-        if (isAlive() && time % getLifeTime() / 9 == 0) {
+        if (isAlive() && getAge() / (getLifeTime() / 9) >= 1 && getAge() / (getLifeTime() / 9) > calf) {
             Random rand = new Random();
             Animal newAnimal;
             if (rand.nextBoolean()) {
                 newAnimal = new Cow("New", 0, 10.5f, 1);
             } else
                 newAnimal = new Bull("New", 0, 10.5f, 1);
+            calf++;
             farm.getBarn().add(newAnimal);
         }
     }
 
     @Override
-    public void butcher(int time, AliveCreature animal, FarmAble farm) {
-        if (isAlive() && time % getLifeTime() == 0) {
+    public void butcher(FarmAble farm) {
+        boolean isOld = (getAge() / getLifeTime() >= 1);
+        if (isAlive() && isOld) {
             int meat = (int) (getWeight() * 0.5);
             setAlive(false);
             farm.addMeat(meat);
-            farm.getBarn().remove(animal);
+            farm.getBarn().remove(this);
         }
     }
 
@@ -40,8 +59,8 @@ public final class Cow extends Animal implements Consumption, ProduceMeat, Produ
     public void toConsumption(int time, FarmAble farm) {
         if (farm instanceof Farm) {
             Farm farm1 = (Farm) farm;
-            int grasFeed = (int) (time * 2);
-            int grain = (int) (time * 1);
+            int grasFeed = time * 2;
+            int grain = time;
             farm1.addGrassFeed(-grasFeed);
             farm1.addGrainFeed(-grain);
         }
@@ -60,17 +79,18 @@ public final class Cow extends Animal implements Consumption, ProduceMeat, Produ
 
     @Override
     public boolean equals(Object o) {
-        return (o instanceof Cow) && (getAge() == ((Cow) o).getAge()) && (getWeight() == ((Cow) o).getWeight());
+        return (o instanceof Cow) && (getAge() == ((Cow) o).getAge()) && (getWeight() == ((Cow) o).getWeight()
+                && (getCalf() == (((Cow) o).getCalf())));
     }
 
     @Override
     public String toString() {
         return "Cow {"
-                + "fullName='" + getName() + '\''
-                + ", age=" + getAge()
-                + ", weight=" + getWeight()
-                + ", price=" + getPrice()
-                + ", " + udder
+                + "'" + getName() + '\''
+                + ", age = " + getAge()
+                + ", weight = " + getWeight()
+                + ", price = " + getPrice()
+                + ", calf = " + getCalf()
                 + '}';
     }
 }

@@ -1,6 +1,13 @@
+/*
+ * Copyright (c) 2022
+ * a plant with its unique characteristics
+ * use it for free
+ */
+
 package clasess;
 
-import interfaces.*;
+import interfaces.Consumption;
+import interfaces.FarmAble;
 
 public final class Corn extends Plant implements Consumption {
 
@@ -19,26 +26,25 @@ public final class Corn extends Plant implements Consumption {
     @Override
     public void produceHarvest(int time, FarmAble farm) {
 
-        if (time % harvestTime == 0) {
-            int harvest = (int) (productivity * plantedArea);
+        if (isPlanted() && growingTime >= harvestTime) {
+            int harvest = (int) (productivity * getPlantedArea());
             setPlanted(false);
+            setGrowingTime(0);
+            setPlantedArea(0);
             farm.addCorn(harvest);
         }
     }
 
-
     @Override
     public void plantField(float plantedArea, FarmAble farm) {
-        this.plantedArea = plantedArea;
+        setPlantedArea(plantedArea);
         int money = (int) (plantedArea * price);
         setPlanted(true);
         farm.addMoney(-money);
-
     }
 
     @Override
     public void toConsumption(int time, FarmAble farm) {
-
         int money = (int) (time * price * 0.02);
         farm.addMoney(-money);
     }
@@ -46,7 +52,7 @@ public final class Corn extends Plant implements Consumption {
     @Override
     public String toString() {
         return "Corn {"
-                + "fullName='" + getName() + '\''
+                + "'" + getName() + '\''
                 + ", productivity=" + productivity
                 + ", harvest time=" + harvestTime
                 + ", price=" + price

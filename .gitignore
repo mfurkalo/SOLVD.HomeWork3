@@ -1,6 +1,16 @@
 ### IntelliJ IDEA ###
+
 .idea/
 out/
+/build
+/.allure
+/target
+/logs
+
+*.iml
+*.ipr
+*.iws
+
 !**/src/main/**/out/
 !**/src/test/**/out/
 

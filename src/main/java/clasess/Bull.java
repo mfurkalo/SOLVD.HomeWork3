@@ -1,10 +1,17 @@
+/*
+ * Copyright (c) 2022
+ * A bull is an animal which consume food and produces meat
+ * use it for free
+ */
+
 package clasess;
 
-import interfaces.*;
+import interfaces.Consumption;
+import interfaces.FarmAble;
 
-public final class Bull extends Animal implements Consumption, ProduceMeat {
+public final class Bull extends Animal implements Consumption {
 
-    private String balls = "I have 2 balls";
+    private final String balls = "I have 2 balls";
 
     public String getBalls() {
         return balls;
@@ -20,12 +27,13 @@ public final class Bull extends Animal implements Consumption, ProduceMeat {
     }
 
     @Override
-    public void butcher(int time, AliveCreature animal, FarmAble farm) {
-        if (isAlive() && time % getLifeTime() == 0) {
+    public void butcher(FarmAble farm) {
+        boolean isOld = (getAge() / getLifeTime() >= 1);
+        if (isAlive() && isOld) {
             int meat = (int) (getWeight() * 0.6);
             setAlive(false);
             farm.addMeat(meat);
-            farm.getBarn().remove(animal);
+            farm.getBarn().remove(this);
         }
     }
 
@@ -36,15 +44,13 @@ public final class Bull extends Animal implements Consumption, ProduceMeat {
         int grain = (int) (time * 1.2);
         farm.addGrassFeed(-grasFeed);
         farm.addGrainFeed(-grain);
-
     }
 
     @Override
     public int hashCode() {
         int result = 0;
         char[] chars = getName().toCharArray();
-        for (char ch : chars
-        ) {
+        for (char ch : chars) {
             result += ch;
         }
         return result;
@@ -57,12 +63,10 @@ public final class Bull extends Animal implements Consumption, ProduceMeat {
 
     @Override
     public String toString() {
-        return "Bull {"
-                + "fullName='" + getName() + '\''
-                + ", age=" + getAge()
-                + ", weight=" + getWeight()
-                + ", price=" + getPrice()
-                + ", " + balls
-                + '}';
+        return "Bull {" + "'" + getName()
+                + '\'' + ", age = " + getAge()
+                + ", weight = " + getWeight()
+                + ", price = " + getPrice()
+                + ", " + balls + '}';
     }
 }
