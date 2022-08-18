@@ -20,37 +20,40 @@ public class Main {
     static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
-        Random random = new Random();
-        int totalTime = 0;
-        int turnTime;
         Farm myFarm = new Farm();
-        boolean game = true;
-        Animal animal;
         myFarm.plantField(myFarm.getWheatField(), myFarm.getCornField().getPlantedArea());
         myFarm.plantField(myFarm.getCornField(), myFarm.getWheatField().getPlantedArea());
-        /* Farm loop */
+        start(myFarm);
+    }
+
+    /* game loop */
+    static void start(Farm farm) {
+        int totalTime = 0;
+        int turnTime;
+        boolean game = true;
+        Animal animal;
         while (game) {
             String gameInput;
             turnTime = 2 + random.nextInt(maxTurnTime);
             totalTime = totalTime + turnTime;
-            myFarm.getWheatField().toConsumption(turnTime, myFarm);
-            myFarm.getWheatField().grow(turnTime);
-            myFarm.getWheatField().produceHarvest(totalTime, myFarm);
-            myFarm.getCornField().toConsumption(turnTime, myFarm);
-            myFarm.getCornField().grow(turnTime);
-            myFarm.getCornField().produceHarvest(totalTime, myFarm);
-            for (int i = 0; i < myFarm.getBarn().size(); i++) {
-                animal = myFarm.getBarn().get(i);
+            farm.getWheatField().toConsumption(turnTime, farm);
+            farm.getWheatField().grow(turnTime);
+            farm.getWheatField().produceHarvest(totalTime, farm);
+            farm.getCornField().toConsumption(turnTime, farm);
+            farm.getCornField().grow(turnTime);
+            farm.getCornField().produceHarvest(totalTime, farm);
+            for (int i = 0; i < farm.getBarn().size(); i++) {
+                animal = farm.getBarn().get(i);
                 if (animal instanceof Cow) {
-                    ((Cow) animal).produceMilk(turnTime, myFarm);
+                    ((Cow) animal).produceMilk(turnTime, farm);
                     animal.grow(turnTime);
-                    animal.becomeNewAnimal(totalTime, myFarm);
-                    ((Cow) animal).toConsumption(turnTime, myFarm);
-                    animal.butcher(myFarm);
+                    animal.becomeNewAnimal(totalTime, farm);
+                    ((Cow) animal).toConsumption(turnTime, farm);
+                    animal.butcher(farm);
                 } else if (animal instanceof Bull) {
                     animal.grow(turnTime);
-                    ((Bull) animal).toConsumption(turnTime, myFarm);
-                    animal.butcher(myFarm);
+                    ((Bull) animal).toConsumption(turnTime, farm);
+                    animal.butcher(farm);
                 }
                 if (animal.getName().endsWith("New")) {
                     try {
@@ -58,17 +61,17 @@ public class Main {
                     } catch (NoCustomNameException e) {
                         System.out.println(e);
                         System.out.print("Give a new name for the animal: ");
-                        gameInput = myFarm.input.nextLine();
+                        gameInput = farm.input.nextLine();
                         animal.setName("animal " + gameInput);
                     }
                 }
             }
             System.out.println("\n\t\t ##### TOTAL time: '" + totalTime + "\t ##### TURN time: '" + turnTime + "' ");
-            System.out.println(myFarm);
-            marketOperation(myFarm);
-            System.out.println(myFarm);
+            System.out.println(farm);
+            marketOperation(farm);
+            System.out.println(farm);
             System.out.println("\t\t######  Would you like to finish your Farm ?  (type 'YES')");
-            gameInput = myFarm.input.nextLine();
+            gameInput = farm.input.nextLine();
             if (gameInput.trim().equalsIgnoreCase("yes"))
                 game = false;
         }

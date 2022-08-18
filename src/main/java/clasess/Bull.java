@@ -8,9 +8,8 @@ package clasess;
 
 import interfaces.Consumption;
 import interfaces.FarmAble;
-import interfaces.ProduceMeat;
 
-public final class Bull extends Animal implements Consumption, ProduceMeat {
+public final class Bull extends Animal implements Consumption {
 
     private final String balls = "I have 2 balls";
 

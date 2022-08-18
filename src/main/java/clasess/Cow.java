@@ -9,12 +9,10 @@ package clasess;
 
 import interfaces.Consumption;
 import interfaces.FarmAble;
-import interfaces.ProduceMeat;
 import interfaces.ProduceMilk;
-
 import java.util.Random;
 
-public final class Cow extends Animal implements Consumption, ProduceMeat, ProduceMilk {
+public final class Cow extends Animal implements Consumption, ProduceMilk {
 
     public int getCalf() {
         return calf;
