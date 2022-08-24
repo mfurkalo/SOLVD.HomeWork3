@@ -238,13 +238,10 @@ public class Farm implements FarmAble {
                 + barnContent();
     }
 
-    /* Getting text content of the barn list*/
+    /* Getting text content of the barn list. Refactored with Lambda function*/
     String barnContent() {
         StringBuilder builder = new StringBuilder();
-        for (Animal animal : barn
-        ) {
-            builder.append('\t').append(animal).append('\n');
-        }
+        barn.forEach(animal -> builder.append('\t').append(animal).append('\n'));
         return builder.toString();
     }
 }
