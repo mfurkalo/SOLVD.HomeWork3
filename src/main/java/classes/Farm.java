@@ -4,7 +4,7 @@
  * use it for free
  */
 
-package clasess;
+package classes;
 
 import interfaces.FarmAble;
 import org.apache.logging.log4j.LogManager;
@@ -17,9 +17,9 @@ import java.util.Scanner;
 public class Farm implements FarmAble {
 
     public static final String CURRENCY = "USD";
-    public static final float LAND;
-    public static final int MILK_PRICE;
-    public static final int MEAT_PRICE;
+    public static float land;
+    public static int milkPrice;
+    public static int meatPrice;
     private static final Logger log = LogManager.getLogger(Farm.class.getName());
     private static int money;
     private static int wheat;
@@ -41,21 +41,34 @@ public class Farm implements FarmAble {
     private ArrayList<Animal> barn = new ArrayList<>();
 
     static {
-        money = 10000;
-        LAND = 456.5f;
-        MEAT_PRICE = 7;
-        MILK_PRICE = 1;
+        FileLoader.loadValues();
         System.out.println("Let's start your farm!      You have: \n \t money " + money + " " + CURRENCY + '\n' +
-                "\tfree land " + LAND + "; Empty barn for animals " + "\n\t milk price: " + MILK_PRICE +
-                "\n\t meat price: " + MEAT_PRICE);
+                "\tfree land " + land + "; Empty barn for animals " + "\n\t milk price: " + milkPrice +
+                "\n\t meat price: " + meatPrice);
     }
 
     public Wheat getWheatField() {
         return wheatField;
     }
 
+    public static void setMilkPrice(int milkPrice) {
+        Farm.milkPrice = milkPrice;
+    }
+
+    public static void setMeatPrice(int meatPrice) {
+        Farm.meatPrice = meatPrice;
+    }
+
+    public static void setLand(float land) {
+        Farm.land = land;
+    }
+
     public Corn getCornField() {
         return cornField;
+    }
+
+    public static void setMoney(int money) {
+        Farm.money = money;
     }
 
     public int getMoney() {
@@ -169,7 +182,7 @@ public class Farm implements FarmAble {
                 try {
                     float area;
                     area = Float.parseFloat(plantInput);
-                    if (area > 0 && area <= (LAND - plantedArea)) {
+                    if (area > 0 && area <= (land - plantedArea)) {
                         plant.plantField(area, this);
                         break;
                     }
@@ -177,7 +190,7 @@ public class Farm implements FarmAble {
                     System.out.print("Wrong input!");
                     log.error("Error Input happened! " + e.getMessage());
                 }
-                System.out.println(" Available only " + (LAND - plantedArea) + " land");
+                System.out.println(" Available only " + (land - plantedArea) + " land");
             }
         } else
             System.out.println(" Sorry, not possible, your " + plant.getName() + " is planted. Waite for harvest");
@@ -214,7 +227,7 @@ public class Farm implements FarmAble {
     public String toString() {
         return ("\t\t\t##########  Farm  ########## \n"
                 + "money '" + money + "',\t"
-                + "free land '" + (LAND - cornField.getPlantedArea() - wheatField.getPlantedArea()) + "',\t"
+                + "free land '" + (land - cornField.getPlantedArea() - wheatField.getPlantedArea()) + "',\t"
                 + "wheat '" + wheat + "',\t"
                 + "corn '" + corn + "',\t"
                 + "milk '" + milk + "',\t"

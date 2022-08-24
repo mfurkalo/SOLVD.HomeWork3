@@ -1,0 +1,12 @@
+/*
+ * Copyright (c) 2022
+ * base setup of Farm's variables
+ * use  semicolon after a variable before its value
+ * use it for free
+ */
+
+
+money : 11111
+land : 487.6
+meat_price : 8
+milk_price : 1

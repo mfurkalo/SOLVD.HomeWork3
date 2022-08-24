@@ -5,7 +5,7 @@
  * use it for free
  */
 
-package clasess;
+package classes;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -174,14 +174,14 @@ public class Main {
                                 }
                                 break;
                             case "3":
-                                System.out.print("How much Milk are you selling (price " + farm.MILK_PRICE + ") ? ");
+                                System.out.print("How much Milk are you selling (price " + farm.milkPrice + ") ? ");
                                 while (true) {
                                     marketInput = input.nextLine();
                                     try {
                                         number = Integer.parseInt(marketInput);
                                         if (number <= farm.getMilk()) {
                                             farm.addMilk(-number);
-                                            farm.addMoney(number * farm.MILK_PRICE);
+                                            farm.addMoney(number * farm.milkPrice);
                                             break;
                                         }
                                     } catch (NumberFormatException e) {
@@ -192,14 +192,14 @@ public class Main {
                                 }
                                 break;
                             case "4":
-                                System.out.print("How much Meat are you selling (price " + farm.MEAT_PRICE + ") ? ");
+                                System.out.print("How much Meat are you selling (price " + farm.meatPrice + ") ? ");
                                 while (true) {
                                     marketInput = input.nextLine();
                                     try {
                                         number = Integer.parseInt(marketInput);
                                         if (number <= farm.getMeat()) {
                                             farm.addMeat(-number);
-                                            farm.addMoney(number * farm.MEAT_PRICE);
+                                            farm.addMoney(number * farm.meatPrice);
                                             break;
                                         }
                                     } catch (NumberFormatException e) {
@@ -216,11 +216,11 @@ public class Main {
                     break;
                 case "3":
                 case "plant":
-                    float freeLand = farm.LAND - farm.getCornField().getPlantedArea()
+                    float freeLand = farm.land - farm.getCornField().getPlantedArea()
                             - farm.getWheatField().getPlantedArea();
                     boolean isFreeLand = (freeLand) > 0 ? true : false;
                     while (isFreeLand) {
-                        System.out.println("What would you like to plant  on '" + (farm.LAND
+                        System.out.println("What would you like to plant  on '" + (farm.land
                                 - farm.getCornField().getPlantedArea() - farm.getWheatField().getPlantedArea())
                                 + "' : \n\t1: Wheat\n\t2: Corn\n\t3: CANCEL");
                         marketInput = input.nextLine();
