@@ -59,7 +59,7 @@ public class Main {
                     try {
                         throw new NoCustomNameException(animal, " needs a new custom name ");
                     } catch (NoCustomNameException e) {
-                        System.out.println(e);
+                        System.out.println(e.getMessage());
                         System.out.print("Give a new name for the animal: ");
                         gameInput = farm.input.nextLine();
                         animal.setName("animal " + gameInput);
@@ -174,14 +174,14 @@ public class Main {
                                 }
                                 break;
                             case "3":
-                                System.out.print("How much Milk are you selling (price " + farm.milkPrice + ") ? ");
+                                System.out.print("How much Milk are you selling (price " + Farm.milkPrice + ") ? ");
                                 while (true) {
                                     marketInput = input.nextLine();
                                     try {
                                         number = Integer.parseInt(marketInput);
                                         if (number <= farm.getMilk()) {
                                             farm.addMilk(-number);
-                                            farm.addMoney(number * farm.milkPrice);
+                                            farm.addMoney(number * Farm.milkPrice);
                                             break;
                                         }
                                     } catch (NumberFormatException e) {
@@ -192,14 +192,14 @@ public class Main {
                                 }
                                 break;
                             case "4":
-                                System.out.print("How much Meat are you selling (price " + farm.meatPrice + ") ? ");
+                                System.out.print("How much Meat are you selling (price " + Farm.meatPrice + ") ? ");
                                 while (true) {
                                     marketInput = input.nextLine();
                                     try {
                                         number = Integer.parseInt(marketInput);
                                         if (number <= farm.getMeat()) {
                                             farm.addMeat(-number);
-                                            farm.addMoney(number * farm.meatPrice);
+                                            farm.addMoney(number * Farm.meatPrice);
                                             break;
                                         }
                                     } catch (NumberFormatException e) {
@@ -216,11 +216,11 @@ public class Main {
                     break;
                 case "3":
                 case "plant":
-                    float freeLand = farm.land - farm.getCornField().getPlantedArea()
+                    float freeLand = Farm.land - farm.getCornField().getPlantedArea()
                             - farm.getWheatField().getPlantedArea();
-                    boolean isFreeLand = (freeLand) > 0 ? true : false;
+                    boolean isFreeLand = (freeLand) > 0;
                     while (isFreeLand) {
-                        System.out.println("What would you like to plant  on '" + (farm.land
+                        System.out.println("What would you like to plant  on '" + (Farm.land
                                 - farm.getCornField().getPlantedArea() - farm.getWheatField().getPlantedArea())
                                 + "' : \n\t1: Wheat\n\t2: Corn\n\t3: CANCEL");
                         marketInput = input.nextLine();
