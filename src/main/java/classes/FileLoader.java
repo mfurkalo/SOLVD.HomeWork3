@@ -10,13 +10,11 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.lang.Math.abs;
+import java.util.stream.Collectors;
 
 public class FileLoader {
 
@@ -49,23 +47,20 @@ public class FileLoader {
         }
     }
 
-    /* Assigns value of starting variables from the strings */
+    /* Assigns value of starting variables from the strings using Lambda function*/
     static void loadValues() {
         readFile();
-        for (String str : list
-        ) {
-            var divider = abs(str.indexOf(DIVIDER_CHAR));
-            if (divider > 1) {
-                var parameter = str.substring(0, divider).trim();
-                if (parameter.equalsIgnoreCase(FileLoader.InitialResources.MONEY.value))
-                    Farm.setMoney(Integer.parseInt(str.substring(divider + 1).trim()));
-                else if (parameter.equalsIgnoreCase(FileLoader.InitialResources.LAND.value))
-                    Farm.setLand(Float.parseFloat(str.substring(divider + 1).trim()));
-                else if (parameter.equalsIgnoreCase(FileLoader.InitialResources.MEAT_PRICE.value))
-                    Farm.setMeatPrice(Integer.parseInt(str.substring(divider + 1).trim()));
-                else if (parameter.equalsIgnoreCase(FileLoader.InitialResources.MILK_PRICE.value))
-                    Farm.setMilkPrice(Integer.parseInt(str.substring(divider + 1).trim()));
-            }
-        }
+        list.stream().filter((s) -> s.contains("" + DIVIDER_CHAR)).collect(Collectors.toList()).forEach(s -> {
+            var divider = s.indexOf(DIVIDER_CHAR);
+            var parameter = s.substring(0, divider).trim();
+            if (parameter.equalsIgnoreCase(FileLoader.InitialResources.MONEY.value))
+                Farm.setMoney(Integer.parseInt(s.substring(divider + 1).trim()));
+            else if (parameter.equalsIgnoreCase(FileLoader.InitialResources.LAND.value))
+                Farm.setLand(Float.parseFloat(s.substring(divider + 1).trim()));
+            else if (parameter.equalsIgnoreCase(FileLoader.InitialResources.MEAT_PRICE.value))
+                Farm.setMeatPrice(Integer.parseInt(s.substring(divider + 1).trim()));
+            else if (parameter.equalsIgnoreCase(FileLoader.InitialResources.MILK_PRICE.value))
+                Farm.setMilkPrice(Integer.parseInt(s.substring(divider + 1).trim()));
+        });
     }
 }
