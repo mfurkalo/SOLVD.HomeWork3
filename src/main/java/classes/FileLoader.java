@@ -50,7 +50,7 @@ public class FileLoader {
     /* Assigns value of starting variables from the strings using Lambda function*/
     static void loadValues() {
         readFile();
-        list.stream().filter((s) -> s.contains("" + DIVIDER_CHAR)).collect(Collectors.toList()).forEach(s -> {
+        list.stream().filter((s) -> s.contains("" + DIVIDER_CHAR)).forEach(s -> {
             var divider = s.indexOf(DIVIDER_CHAR);
             var parameter = s.substring(0, divider).trim();
             if (parameter.equalsIgnoreCase(FileLoader.InitialResources.MONEY.value))
