@@ -4,7 +4,7 @@
  * se it for free
  */
 
-package classes;
+package instances;
 
 public class NoCustomNameException extends Exception {
 

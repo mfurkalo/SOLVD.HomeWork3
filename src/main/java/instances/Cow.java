@@ -5,7 +5,7 @@
  * use it for free
  */
 
-package classes;
+package instances;
 
 import interfaces.Consumption;
 import interfaces.FarmAble;
@@ -30,6 +30,9 @@ public final class Cow extends Animal implements Consumption, ProduceMilk {
         farm.addMilk(time * 10);
     }
 
+    /**
+     * A cow gives birth to a new animal and gets a calf
+     */
     @Override
     public void becomeNewAnimal(int time, Farm farm) {
         if (isAlive() && getAge() / (getLifeTime() / 9) >= 1 && getAge() / (getLifeTime() / 9) > calf) {

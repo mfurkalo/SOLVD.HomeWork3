@@ -4,12 +4,12 @@
  * use it for free
  */
 
-package classes;
+package instances;
 
 import interfaces.AliveCreature;
 import interfaces.Grow;
 
-abstract class Animal implements AliveCreature, Grow {
+public abstract class Animal implements AliveCreature, Grow {
 
     private final int price;
     private int lifeTime;
@@ -68,6 +68,9 @@ abstract class Animal implements AliveCreature, Grow {
 
     abstract public void becomeNewAnimal(int time, Farm farm);
 
+    /**
+     * adjusting of animal age and weight according to the time
+     */
     public void grow(int time) {
         age = age + time;
         weight = weight + (int) (time * 1.5);

@@ -5,8 +5,9 @@
  * use it for free
  */
 
-package classes;
+package services;
 
+import instances.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.util.Random;
@@ -14,8 +15,8 @@ import java.util.Scanner;
 
 public class Main {
     private static final Logger log = LogManager.getLogger(Main.class.getName());
-    static int maxTurnTime = 20;
-    static int maxAnimalBuy = 5;
+    public static int maxTurnTime = 20;
+    public static int maxAnimalBuy = 5;
     static Random random = new Random();
     static Scanner input = new Scanner(System.in);
 
@@ -26,7 +27,9 @@ public class Main {
         start(myFarm);
     }
 
-    /* game loop */
+    /**
+     *  game loop
+     */
     static void start(Farm farm) {
         int totalTime = 0;
         int turnTime;
@@ -59,9 +62,9 @@ public class Main {
                     try {
                         throw new NoCustomNameException(animal, " needs a new custom name ");
                     } catch (NoCustomNameException e) {
-                        System.out.println(e.getMessage());
+                        System.out.println(e);
                         System.out.print("Give a new name for the animal: ");
-                        gameInput = farm.input.nextLine();
+                        gameInput = input.nextLine();
                         animal.setName("animal " + gameInput);
                     }
                 }
@@ -71,13 +74,15 @@ public class Main {
             marketOperation(farm);
             System.out.println(farm);
             System.out.println("\t\t######  Would you like to finish your Farm ?  (type 'YES')");
-            gameInput = farm.input.nextLine();
+            gameInput = input.nextLine();
             if (gameInput.trim().equalsIgnoreCase("yes"))
                 game = false;
         }
     }
 
-    /* Making business operations: Buy, Sell, Plant, Continue */
+    /**
+     * Making business operations: Buy, Sell, Plant, Continue
+     */
     static void marketOperation(Farm farm) {
         int price, number;
         boolean isTrading = true;

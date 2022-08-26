@@ -4,8 +4,9 @@
  * use it for free
  */
 
-package classes;
+package instances;
 
+import services.*;
 import interfaces.FarmAble;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,7 +36,7 @@ public class Farm implements FarmAble {
     }
 
     Random random = new Random();
-    Scanner input = new Scanner(System.in);
+    private Scanner input = new Scanner(System.in);
     private Wheat wheatField = new Wheat("Hard Red Winter wheat", 32, 240);
     private Corn cornField = new Corn("Ambrosia Hybrid corn", 756, 60);
     private ArrayList<Animal> barn = new ArrayList<>();
@@ -131,7 +132,9 @@ public class Farm implements FarmAble {
         Farm.grainFeed += grainFeed;
     }
 
-    /* Adding the animals to the farm's barn */
+    /**
+     * Adding the animals to the farm's barn
+     */
     private boolean addAnimal(String animalInput, AnimalType animalType, int age, int weight, int maxAnimalBuy) {
         int price, number;
         try {
@@ -173,8 +176,10 @@ public class Farm implements FarmAble {
         return false;
     }
 
-    /* Planting land with a plant */
-    void plantField(Plant plant, float plantedArea) {
+    /**
+     *  Planting land with a plant
+     */
+    public void plantField(Plant plant, float plantedArea) {
         if (plant.getPlantedArea() == 0) {
             System.out.println("How much land would you like to plant with " + plant);
             while (true) {
@@ -196,8 +201,10 @@ public class Farm implements FarmAble {
             System.out.println(" Sorry, not possible, your " + plant.getName() + " is planted. Waite for harvest");
     }
 
-    /* Buying animals for the farm */
-    void animalBuy() {
+    /**
+     *  Buying animals for the farm
+     */
+    public void animalBuy() {
         boolean isBullBought = false, isCowBought = false;
         int age = 45;
         int weight = 600;
@@ -222,7 +229,9 @@ public class Farm implements FarmAble {
         } while (!isBullBought || !isCowBought);
     }
 
-    /* Getting the farm state in text */
+    /**
+     *  Getting the farm state in text
+     */
     @Override
     public String toString() {
         return ("\t\t\t##########  Farm  ########## \n"
@@ -238,7 +247,9 @@ public class Farm implements FarmAble {
                 + barnContent();
     }
 
-    /* Getting text content of the barn list. Refactored with Lambda function*/
+    /**
+     *  Getting text content of the barn list. Refactored with Lambda function
+     */
     String barnContent() {
         StringBuilder builder = new StringBuilder();
         barn.forEach(animal -> builder.append('\t').append(animal).append('\n'));

@@ -6,7 +6,7 @@
 
 package interfaces;
 
-import classes.Farm;
+import instances.Farm;
 
 public interface ProduceMilk {
 

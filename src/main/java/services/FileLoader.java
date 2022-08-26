@@ -4,8 +4,9 @@
  * use it for free
  */
 
-package classes;
+package services;
 
+import instances.Farm;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
 import org.apache.logging.log4j.LogManager;
@@ -14,7 +15,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class FileLoader {
 
@@ -23,7 +23,9 @@ public class FileLoader {
     private static final List<String> list = new ArrayList<>();
     private static final Logger log = LogManager.getLogger(Farm.class.getName());
 
-    /* Names of variables for reading from the file */
+    /**
+     *  Names of variables for reading from the file
+     */
     enum InitialResources {
         MONEY("money"), LAND("land"), MEAT_PRICE("meat_price"), MILK_PRICE("milk_price");
         final String value;
@@ -33,7 +35,9 @@ public class FileLoader {
         }
     }
 
-    /* Reads the file line by line into the list of strings */
+    /**
+     *  Reads the file line by line into the list of strings
+     */
     private static void readFile() {
         File file = FileUtils.getFile(FILE_PATH);
         try {
@@ -47,8 +51,10 @@ public class FileLoader {
         }
     }
 
-    /* Assigns value of starting variables from the strings using Lambda function*/
-    static void loadValues() {
+    /**
+     *  Assigns value of starting variables from the strings using Lambda function
+     */
+    public static void loadValues() {
         readFile();
         list.stream().filter((s) -> s.contains("" + DIVIDER_CHAR)).forEach(s -> {
             var divider = s.indexOf(DIVIDER_CHAR);

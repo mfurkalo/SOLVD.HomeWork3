@@ -4,18 +4,19 @@
  * use it for free
  */
 
-package classes;
+package instances;
 
-import interfaces.*;
+import interfaces.Consumption;
+import interfaces.FarmAble;
 
-public final class Wheat extends Plant implements Consumption {
+public final class Corn extends Plant implements Consumption {
 
-    public Wheat(String name, float productivity, int harvestTime) {
+    public Corn(String name, float productivity, int harvestTime) {
         super();
-        setName("Wheat " + name);
+        setName("Corn " + name);
         this.productivity = productivity;
         this.harvestTime = harvestTime;
-        this.price = 3;
+        this.price = 2;
     }
 
     public int getPrice() {
@@ -24,12 +25,13 @@ public final class Wheat extends Plant implements Consumption {
 
     @Override
     public void produceHarvest(int time, FarmAble farm) {
+
         if (isPlanted() && growingTime >= harvestTime) {
             int harvest = (int) (productivity * getPlantedArea());
             setPlanted(false);
             setGrowingTime(0);
             setPlantedArea(0);
-            farm.addWheat(harvest);
+            farm.addCorn(harvest);
         }
     }
 
@@ -42,35 +44,18 @@ public final class Wheat extends Plant implements Consumption {
     }
 
     @Override
-    public int hashCode() {
-        int result = 0;
-        char[] chars = getName().toCharArray();
-        for (char ch : chars
-        ) {
-            result += ch;
-        }
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return (o instanceof Wheat) && (getName().equals(((Wheat) o).getName()) && (productivity
-                == ((Wheat) o).productivity));
+    public void toConsumption(int time, FarmAble farm) {
+        int money = (int) (time * price * 0.02);
+        farm.addMoney(-money);
     }
 
     @Override
     public String toString() {
-        return "Wheat {"
+        return "Corn {"
                 + "'" + getName() + '\''
                 + ", productivity=" + productivity
                 + ", harvest time=" + harvestTime
                 + ", price=" + price
                 + '}';
-    }
-
-    @Override
-    public void toConsumption(int time, FarmAble farm) {
-        int money = (int) (time * price * 0.01);
-        farm.addMoney(-money);
     }
 }
