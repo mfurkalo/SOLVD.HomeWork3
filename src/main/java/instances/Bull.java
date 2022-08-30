@@ -4,7 +4,7 @@
  * use it for free
  */
 
-package clasess;
+package instances;
 
 import interfaces.Consumption;
 import interfaces.FarmAble;

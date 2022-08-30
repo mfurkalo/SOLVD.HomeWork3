@@ -4,12 +4,12 @@
  * use it for free
  */
 
-package clasess;
+package instances;
 
 import interfaces.FarmAble;
 import interfaces.Grow;
 
-abstract class Plant implements Grow {
+public abstract class Plant implements Grow {
 
     private boolean isPlanted;
     private String name;

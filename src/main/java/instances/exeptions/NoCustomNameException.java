@@ -4,7 +4,9 @@
  * se it for free
  */
 
-package clasess;
+package instances.exeptions;
+
+import instances.Animal;
 
 public class NoCustomNameException extends Exception {
 
