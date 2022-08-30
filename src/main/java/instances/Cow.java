@@ -32,6 +32,8 @@ public final class Cow extends Animal implements Consumption, ProduceMilk {
 
     /**
      * A cow gives birth to a new animal and gets a calf
+     * @param time game time
+     * @param farm the game farm an instance of Farm.clas
      */
     @Override
     public void becomeNewAnimal(int time, Farm farm) {

@@ -27,7 +27,10 @@ public class FileLoader {
      *  Names of variables for reading from the file
      */
     enum InitialResources {
-        MONEY("money"), LAND("land"), MEAT_PRICE("meat_price"), MILK_PRICE("milk_price");
+        MONEY("money"),
+        LAND("land"),
+        MEAT_PRICE("meat_price"),
+        MILK_PRICE("milk_price");
         final String value;
 
         InitialResources(String value) {

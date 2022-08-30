@@ -70,6 +70,7 @@ public abstract class Animal implements AliveCreature, Grow {
 
     /**
      * adjusting of animal age and weight according to the time
+     * @param time game time
      */
     public void grow(int time) {
         age = age + time;

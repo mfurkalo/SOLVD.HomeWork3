@@ -133,7 +133,13 @@ public class Farm implements FarmAble {
     }
 
     /**
-     * Adding the animals to the farm's barn
+     * Adding the animals to the farm's barn.
+     * @param animalInput string input from the terminal
+     * @param animalType a type of animal from the enum AnimalType
+     * @param age int age of the animal
+     * @param weight int weight of the animal
+     * @param maxAnimalBuy limit for buying at once
+     * @return if operation completed, or not
      */
     private boolean addAnimal(String animalInput, AnimalType animalType, int age, int weight, int maxAnimalBuy) {
         int price, number;
@@ -178,6 +184,8 @@ public class Farm implements FarmAble {
 
     /**
      *  Planting land with a plant
+     * @param plant instance of an heir of the Plant.clas
+     * @param plantedArea area for planting
      */
     public void plantField(Plant plant, float plantedArea) {
         if (plant.getPlantedArea() == 0) {

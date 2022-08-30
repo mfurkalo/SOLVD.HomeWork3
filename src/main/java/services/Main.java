@@ -8,6 +8,7 @@
 package services;
 
 import instances.*;
+import instances.exeptions.NoCustomNameException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.util.Random;
@@ -29,6 +30,7 @@ public class Main {
 
     /**
      *  game loop
+     * @param farm takes ta farm into the game loop
      */
     static void start(Farm farm) {
         int totalTime = 0;
@@ -82,6 +84,7 @@ public class Main {
 
     /**
      * Making business operations: Buy, Sell, Plant, Continue
+     * @param farm an instance of the Farm.clas - our farm
      */
     static void marketOperation(Farm farm) {
         int price, number;
